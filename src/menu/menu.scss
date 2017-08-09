@@ -2,21 +2,21 @@
   display: flex;
   flex-flow: column;
   justify-content: center;
-  padding-right: rem(5);
+  padding-right: 0.3571rem;
+}
 
-  .menu {
-    flex: 0 1 auto;
-    height: rem(30);
-    cursor: pointer;
+.humburguer-menu .menu {
+  flex: 0 1 auto;
+  height: 2.1428rem;
+  cursor: pointer;
+}
 
-    .humburguer-stroke {
-      width: rem(30);
-      border: rem(3) solid $light-blue;
-      border-radius: rem(10);
-      margin-bottom: rem(5);
-      background-color: $light-blue;
-    }
-  }
+.humburguer-menu .menu .humburguer-stroke {
+  width: 2.1428rem;
+  border: 0.2142rem solid #9ccef9;
+  border-radius: 0.7142rem;
+  margin-bottom: 0.3571;
+  background-color: #9ccef9;
 }
 
 .menu-wrapper {
@@ -25,31 +25,31 @@
   right: 0;
   height: 100%;
   width: 0px;
-  border-left: rem(1) solid $light-blue;
-  background-color: $black;
-  color: $light-blue;
+  border-left: 0.0714rem solid #9ccef9;
+  background-color: #000;
+  color: #9ccef9;
   z-index: 100;
   transition: all 1s;
+}
 
-  &.opened {
-    width: rem(160);
-  }
+.menu-wrapper.opened {
+  width: 11.4285rem;
+}
 
-  ul {
-    list-style-type: none;
+.menu-wrapper ul {
+  list-style-type: none;
+}
 
-    li {
-      margin-bottom: rem(10);
+.menu-wrapper ul li {
+  margin-bottom: 0.7142rem;
+}
 
-      &.separator {
-        border: rem(1) solid $light-blue;
-        height: 0px;
-      }
+.menu-wrapper ul li.separator {
+  border: 0.0714rem solid #9ccef9;
+  height: 0px;
+}
 
-      a {
-        color: $light-blue;
-        text-decoration: none;
-      }
-    }
-  }
+.menu-wrapper ul li a {
+  color: #9ccef9;
+  text-decoration: none;
 }
