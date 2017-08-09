@@ -2,33 +2,33 @@
   display: flex;
   align-items: center;
   height: 100%;
-  color: $white;
+  color: #efefef;
+}
 
-  form {
-    border: $blue solid rem(1);
-    padding: rem(15);
-    border-radius: rem(5);
-    margin: auto;
+.login-wrapper form {
+  border: #00a4d9 solid 0.0715rem;
+  padding: 1.0714rem;
+  border-radius: 0.3571rem;
+  margin: auto;
+}
 
-    .form-input {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: rem(10);
-      color: $light-blue;
+.login-wrapper form .form-input {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.7142rem;
+  color: #9ccef9;
+}
 
-      label {
-        margin-right: rem(5);
-      }
-    }
+.login-wrapper form .form-input label {
+  margin-right: 0.3571rem;
+}
 
-    button.submit {
-      float: right;
+.login-wrapper form button.submit {
+  float: right;
+}
 
-      img.loading {
-        width: rem(10);
-        position: relative;
-        top: rem(1);
-      }
-    }
-  }
+.login-wrapper form button.submit img.loading {
+  width: 0.7142rem;
+  position: relative;
+  top: 0.0715rem;
 }
