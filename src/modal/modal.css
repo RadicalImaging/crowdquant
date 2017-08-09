@@ -1,0 +1,40 @@
+.modal {
+  position: fixed;
+  top: 25%;
+  left: calc(50% - 135px);
+  padding: 1em;
+  background: #fff;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease-out;
+
+  box-shadow: 0 0.2142rem 0.4285rem rgba(0,0,0,0.25);
+  border: 0.0714rem solid #bbb;
+
+  transform: translateY(-100%);
+}
+
+.modal.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0%);
+}
+
+.modal .button-holder {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+
+.modal .button-holder button {
+  flex: 1 0 auto;
+}
+
+.modal .button-holder .logout {
+  margin-right: 1.4285rem;
+}
+
+.modal .button-holder .next-case {
+  margin-left: 1.4285rem;
+}
