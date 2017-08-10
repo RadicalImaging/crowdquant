@@ -1,0 +1,34 @@
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: #efefef;
+}
+
+.login-wrapper form {
+  border: #00a4d9 solid 0.0715rem;
+  padding: 1.0714rem;
+  border-radius: 0.3571rem;
+  margin: auto;
+}
+
+.login-wrapper form .form-input {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.7142rem;
+  color: #9ccef9;
+}
+
+.login-wrapper form .form-input label {
+  margin-right: 0.3571rem;
+}
+
+.login-wrapper form button.submit {
+  float: right;
+}
+
+.login-wrapper form button.submit img.loading {
+  width: 0.7142rem;
+  position: relative;
+  top: 0.0715rem;
+}

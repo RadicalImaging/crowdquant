@@ -1,102 +1,105 @@
-import Commands from './commands';
+var Tools = (function () {
+  var active = '';
+  var toolsSelector = '.viewer-tools';
+  var $cornerstoneViewport = $('#conerstoneViewport');
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  var $element;
 
-const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-export default {
-  active: '',
-  toolsSelector: '.viewer-tools',
-  $conerstoneViewport: $('#conerstoneViewport'),
-  deactivateActiveTool() {
-    if (this.active) {
-      this.deactivate(this.active);
-      this.active = '';
-    }
-  },
-  toggleTool(toolToActivate) {
-    if (!toolToActivate) {
-      return;
-    }
-
-    if (isMobile) {
-      if (toolToActivate === 'length') {
-        toolToActivate = `${toolToActivate}Touch`;
-      } else {
-        toolToActivate = `${toolToActivate}TouchDrag`;
+  return {
+    deactivateActiveTool: function () {
+      if (active) {
+        Tools.deactivate(active);
+        active = '';
       }
-    }
+    },
+    toggleTool: function (toolToActivate) {
+      if (!toolToActivate) {
+        return;
+      }
 
-    if (this.active) {
-      this.deactivate(this.active);
-    }
+      if (isMobile) {
+        if (toolToActivate === 'length') {
+          toolToActivate = toolToActivate + 'Touch';
+        } else {
+          toolToActivate = toolToActivate + 'TouchDrag';
+        }
+      }
 
-    cornerstoneTools[toolToActivate].enable(this.$element);
-    cornerstoneTools[toolToActivate].activate(this.$element, 1);
+      if (active) {
+        Tools.deactivate(active);
+      }
 
-    this.active = toolToActivate;
-  },
-  deactivate(tool) {
-    cornerstoneTools[tool].disable(this.$element);
-    cornerstoneTools[tool].deactivate(this.$element, 1);
-  },
-  initStackTool(imageIds) {
-    const $thumb = $('.thumb');
-    const stack = {
-      currentImageIdIndex: 0,
-      imageIds: imageIds
-    };
+      cornerstoneTools[toolToActivate].enable($element);
+      cornerstoneTools[toolToActivate].activate($element, 1);
 
-    cornerstoneTools.addStackStateManager(this.$element, ['stack']);
-    cornerstoneTools.addToolState(this.$element, 'stack', stack);
-    cornerstoneTools.stackScrollWheel.activate(this.$element);
-    cornerstoneTools.stackScrollMultiTouch.activate(this.$element);
+      active = toolToActivate;
+    },
+    deactivate: function (tool) {
+      cornerstoneTools[tool].disable($element);
+      cornerstoneTools[tool].deactivate($element, 1);
+    },
+    initStackTool: function (imageIds) {
+      var $thumb = $('.thumb');
+      var stack = {
+        currentImageIdIndex: 0,
+        imageIds: imageIds
+      };
 
-    $thumb.css('width', (100/stack.imageIds.length) + '%');
+      cornerstoneTools.addStackStateManager($element, ['stack']);
+      cornerstoneTools.addToolState($element, 'stack', stack);
+      cornerstoneTools.stackScrollWheel.activate($element);
+      cornerstoneTools.stackScrollMultiTouch.activate($element);
 
-    $(this.$element).on('CornerstoneNewImage', function () {
-      var currentIndex = stack.currentImageIdIndex;
+      $thumb.css('width', (100/stack.imageIds.length) + '%');
 
-      $thumb.css({
-        'margin-left': ((100/stack.imageIds.length)*currentIndex) + '%'
+      $($element).on('CornerstoneNewImage', function () {
+        var currentIndex = stack.currentImageIdIndex;
+
+        $thumb.css({
+          'margin-left': ((100/stack.imageIds.length)*currentIndex) + '%'
+        });
       });
-    });
-  },
-  attachEvents() {
-    // Extract which tool we are using and activating it
-    $(this.toolsSelector).on('click', 'a[data-tool]', event => {
-      const $element = $(event.currentTarget);
-      const tool = $element.attr('data-tool');
+    },
+    attachEvents: function () {
+      // Extract which tool we are using and activating it
+      $(toolsSelector).on('click', 'a[data-tool]', function (event) {
+        var $targetElement = $(event.currentTarget);
+        var tool = $targetElement.attr('data-tool');
 
-      $('.active').removeClass('active');
+        $('.active').removeClass('active');
 
-      this.toggleTool(tool);
+        Tools.toggleTool(tool);
 
-      $element.parent().addClass('active');
-    });
+        $targetElement.parent().addClass('active');
+      });
 
-    // Limiting measurements to 1
-    this.$conerstoneViewport.on('touchstart mousedown', () => {
-      const lengths = cornerstoneTools.getToolState(this.$element, 'length');
+      // Limiting measurements to 1
+      $cornerstoneViewport.on('touchstart mousedown', function () {
+        var lengths = cornerstoneTools.getToolState($element, 'length');
 
-      if (lengths && lengths.data.length === 2) {
-        lengths.data.shift();
-        cornerstone.updateImage(this.$element);
-      }
-    });
-  },
-  initTools(imageIds) {
-    cornerstoneTools.mouseInput.enable(this.$element);
-    cornerstoneTools.touchInput.enable(this.$element);
-    cornerstoneTools.mouseWheelInput.enable(this.$element);
+        if (lengths && lengths.data.length === 2) {
+          lengths.data.shift();
+          cornerstone.updateImage($element);
+        }
+      });
+    },
+    initTools: function (imageIds, $viewportElement) {
+      $element = $viewportElement;
 
-    this.initStackTool(imageIds);
+      cornerstoneTools.mouseInput.enable($element);
+      cornerstoneTools.touchInput.enable($element);
+      cornerstoneTools.mouseWheelInput.enable($element);
 
-    // removing default context menu
-    this.$element.oncontextmenu = function (event) {
-      event.preventDefault();
+      Tools.initStackTool(imageIds);
 
-      return false;
-    };
+      // removing default context menu
+      $element.oncontextmenu = function (event) {
+        event.preventDefault();
 
-    this.attachEvents();
-  }
-};
+        return false;
+      };
+
+      Tools.attachEvents();
+    }
+  };
+})();

@@ -1,67 +1,66 @@
-import Login from '../login/login';
-import Modal from '../modal/modal';
-import Viewer from '../viewer/viewer';
+var Menu = (function () {
+  var $hamburguerMenu = $('.hamburguer-menu');
+  var $menuWrapper = $('.menu-wrapper');
+  var $overlay = $('.loading-overlay');
 
-export default {
-  $hamburguerMenu: $('.humburguer-menu'),
-  $menuWrapper: $('.menu-wrapper'),
-  $overlay: $('.loading-overlay'),
-  submit() {
-    this.closeMenu();
-    this.$overlay.removeClass('invisible').addClass('submitting');
+  return {
+    submit: function () {
+      Menu.closeMenu();
+      $overlay.removeClass('invisible').addClass('submitting');
 
-    setTimeout(() => {
-      Modal.show();
+      setTimeout(function () {
+        Modal.show();
 
-      this.$overlay.removeClass('submitting');
-    }, 2000);
-  },
-  nextCase() {
-    this.closeMenu();
-    Viewer.getNextCase();
-  },
-  logout(){
-    this.closeMenu();
-    Login.logout();
-  },
-  closeMenu() {
-    this.$overlay.addClass('invisible');
-    this.$menuWrapper.removeClass('opened');
+        $overlay.removeClass('submitting');
+      }, 2000);
+    },
+    nextCase: function () {
+      Menu.closeMenu();
+      Viewer.getNextCase();
+    },
+    logout: function () {
+      Menu.closeMenu();
+      Login.logout();
+    },
+    closeMenu: function () {
+      $overlay.addClass('invisible');
+      $menuWrapper.removeClass('opened');
 
-    setTimeout(() => {
-      this.$menuWrapper.addClass('invisible');
-    }, 1200);
-  },
-  init() {
-    Modal.init();
+      setTimeout(function () {
+        $menuWrapper.addClass('invisible');
+      }, 1200);
+    },
+    init: function () {
+      Modal.init();
 
-    this.$hamburguerMenu.on('click', (event) => {
-      event.preventDefault();
+      $hamburguerMenu.on('click', function (event) {
+        event.preventDefault();
 
-      this.$overlay.removeClass('invisible');
-      this.$menuWrapper.removeClass('invisible');
+        $overlay.removeClass('invisible');
+        $menuWrapper.removeClass('invisible');
 
-      setTimeout(() => {
-        this.$menuWrapper.addClass('opened');
-        this.$overlay.removeClass('invisible');
-      }, 200);
-    });
+        setTimeout(() => {
+          $menuWrapper.addClass('opened');
+          $overlay.removeClass('invisible');
+        }, 200);
+      });
 
-    this.$menuWrapper.on('click', 'a[data-menu]', (event) => {
-      const $element = $(event.currentTarget);
-      const menu = $element.attr('data-menu');
+      $menuWrapper.on('click', 'a[data-menu]', function (event) {
+        var $element = $(event.currentTarget);
+        var menuItem = $element.attr('data-menu');
 
-      event.preventDefault();
+        event.preventDefault();
 
-      if (menu) {
-        this[menu]();
-      }
-    });
+        if (menuItem) {
+          Menu[menuItem]();
+        }
+      });
 
-    this.$overlay.on('click', (event) => {
-      if (this.$menuWrapper.hasClass('opened')) {
-        this.closeMenu();
-      }
-    });
+      $overlay.on('click', function (event) {
+        if ($menuWrapper.hasClass('opened')) {
+          Menu.closeMenu();
+        }
+      });
+    }
   }
-}
+})();

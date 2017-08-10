@@ -4,7 +4,11 @@
     <title>Lightweight Viewer</title>
     <meta name="viewport" content="initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="./src/main.css">
+    <link rel="stylesheet" type="text/css" href="./src/login/login.css">
+    <link rel="stylesheet" type="text/css" href="./src/menu/menu.css">
+    <link rel="stylesheet" type="text/css" href="./src/modal/modal.css">
+    <link rel="stylesheet" type="text/css" href="./src/viewer/viewer.css">
   </head>
   <body>
     <div class="login-wrapper">
@@ -31,7 +35,7 @@
           <div class="tool">
             <a href="/#" data-tool="wwwc">
               <svg class="tool-img">
-                <use href="/imgs/icons.svg#icon-status-complete"></use>
+                <use href="./imgs/icons.svg#icon-tools-levels-group"></use>
               </svg>
               W/L
             </a>
@@ -39,7 +43,7 @@
           <div class="tool">
             <a href="/#" data-tool="length">
               <svg class="tool-img">
-                <use href="/imgs/icons.svg#icon-tools-measure-temp"></use>
+                <use href="./imgs/icons.svg#icon-tools-measure-temp"></use>
               </svg>
               Length
             </a>
@@ -47,7 +51,7 @@
           <div class="tool">
             <a href="/#" data-tool="pan">
               <svg class="tool-img">
-                <use href="/imgs/icons.svg#icon-tools-pan"></use>
+                <use href="./imgs/icons.svg#icon-tools-pan"></use>
               </svg>
               Pan
             </a>
@@ -55,7 +59,7 @@
           <div class="tool">
             <a href="/#" data-tool="zoom">
               <svg class="tool-img">
-                <use href="/imgs/icons.svg#icon-tools-zoom"></use>
+                <use href="./imgs/icons.svg#icon-tools-zoom"></use>
               </svg>
               Zoom
             </a>
@@ -63,18 +67,18 @@
           <div class="tool">
             <a href="/#" data-command="clearAll">
               <svg>
-                <use href="/imgs/icons.svg#icon-ui-close"></use>
+                <use href="./imgs/icons.svg#icon-ui-close"></use>
               </svg>
               Clear
             </a>
           </div>
         </div>
 
-        <div class="humburguer-menu">
+        <div class="hamburguer-menu">
           <a class="menu">
-            <div class="humburguer-stroke"></div>
-            <div class="humburguer-stroke"></div>
-            <div class="humburguer-stroke"></div>
+            <div class="hamburguer-stroke"></div>
+            <div class="hamburguer-stroke"></div>
+            <div class="hamburguer-stroke"></div>
           </a>
         </div>
       </div>
@@ -111,16 +115,26 @@
       </ul>
     </div>
 
-    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="../node_modules/hammerjs/hammer.min.js"></script>
-    <script type="text/javascript" src="../node_modules/cornerstone-math/dist/cornerstoneMath.min.js"></script>
-    <script type="text/javascript" src="../node_modules/cornerstone-core/dist/cornerstone.min.js"></script>
-    <script type="text/javascript" src="../node_modules/cornerstone-tools/dist/cornerstoneTools.min.js"></script>
-    <script type="text/javascript" src="../node_modules/dicom-parser/dist/dicomParser.min.js"></script>
-    <script type="text/javascript" src="../node_modules/cornerstone-wado-image-loader/dist/cornerstoneWADOImageLoader.min.js"></script>
-    <script type="text/javascript" src="./bundle.js"></script>
+    <!-- Dependencies -->
+    <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="./node_modules/hammerjs/hammer.min.js"></script>
+    <script type="text/javascript" src="./node_modules/cornerstone-math/dist/cornerstoneMath.min.js"></script>
+    <script type="text/javascript" src="./node_modules/cornerstone-core/dist/cornerstone.min.js"></script>
+    <script type="text/javascript" src="./node_modules/cornerstone-tools/dist/cornerstoneTools.min.js"></script>
+    <script type="text/javascript" src="./node_modules/dicom-parser/dist/dicomParser.min.js"></script>
+    <script type="text/javascript" src="./node_modules/cornerstone-wado-image-loader/dist/cornerstoneWADOImageLoader.min.js"></script>
+
+    <!-- Code -->
+    <script type="text/javascript" src="./src/login/login.js"></script>
+    <script type="text/javascript" src="./src/menu/menu.js"></script>
+    <script type="text/javascript" src="./src/modal/modal.js"></script>
+    <script type="text/javascript" src="./src/viewer/commands.js"></script>
+    <script type="text/javascript" src="./src/viewer/connector.js"></script>
+    <script type="text/javascript" src="./src/viewer/files.js"></script>
+    <script type="text/javascript" src="./src/viewer/tools.js"></script>
+    <script type="text/javascript" src="./src/viewer/viewer.js"></script>
     <script type="text/javascript">
-      
+      Login.init();
     </script>
   </body>
 </html>

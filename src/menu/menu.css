@@ -1,0 +1,55 @@
+.hamburguer-menu {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  padding-right: 0.3571rem;
+}
+
+.hamburguer-menu .menu {
+  flex: 0 1 auto;
+  height: 2.1428rem;
+  cursor: pointer;
+}
+
+.hamburguer-menu .menu .hamburguer-stroke {
+  width: 2.1428rem;
+  border: 0.2142rem solid #9ccef9;
+  border-radius: 0.7142rem;
+  margin-bottom: 0.3571rem;
+  background-color: #9ccef9;
+}
+
+.menu-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 0px;
+  border-left: 0.0714rem solid #9ccef9;
+  background-color: #000;
+  color: #9ccef9;
+  z-index: 100;
+  transition: all 1s;
+}
+
+.menu-wrapper.opened {
+  width: 11.4285rem;
+}
+
+.menu-wrapper ul {
+  list-style-type: none;
+}
+
+.menu-wrapper ul li {
+  margin-bottom: 0.7142rem;
+}
+
+.menu-wrapper ul li.separator {
+  border: 0.0714rem solid #9ccef9;
+  height: 0px;
+}
+
+.menu-wrapper ul li a {
+  color: #9ccef9;
+  text-decoration: none;
+}

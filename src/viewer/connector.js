@@ -1,20 +1,21 @@
-const mockUrl = 'http://localhost:4000/mock.json';
+var Connector = (function () {
+  var mockUrl = 'http://localhost:4000/mock.json';
 
-export default {
-  getCase() {
-    return new Promise(function (resolve, reject) {
-      const successHandler = (response) => {
-        resolve(response);
+  return {
+    getCase: function (callback) {
+      var successHandler = function (response) {
+        callback(null, response);
       };
-      const errorHandler = (error) => {
+
+      var errorHandler = function (error) {
         if (error) {
           console.error(error);
         }
 
-        reject(error);
+        callback(error);
       };
 
-      $.ajax(mockUrl).then(successHandler);
-    });
+      $.ajax(mockUrl).done(successHandler).fail(errorHandler);
+    }
   }
-};
+})();

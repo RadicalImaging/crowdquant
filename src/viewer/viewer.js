@@ -1,38 +1,42 @@
-import Files from './files';
-import Tools from './tools';
-import Commands from './commands';
-import Menu from '../menu/menu';
+var Viewer = (function () {
+  var $window = $(window);
+  var $viewer = $('.viewer-wrapper');
+  var $overlay = $('.loading-overlay');
+  var $element;
 
-export default {
-  $window: $(window),
-  $viewer: $('.viewer-wrapper'),
-  $overlay: $('.loading-overlay'),
-  getNextCase() {
-    this.$overlay.removeClass('invisible').addClass('loading');
+  return {
+    getNextCase: function () {
+      $overlay.removeClass('invisible').addClass('loading');
 
-    Files.getCaseImages().then((imagesIds) => {
-      Tools.initTools(imagesIds);
-      Commands.initCommands();
+      Files.getCaseImages(function (error, imagesIds) {
+        if (error) {
+          console.error(error);
 
-      cornerstone.loadImage(imagesIds[0]).then((image) => {
-        cornerstone.displayImage(this.$element, image);
+          $overlay.addClass('invisible');
+          alert('There was an error fetching the case\'s images... Please wait a moment until you try to get the next case.');
+
+          return;
+        }
+        Tools.initTools(imagesIds, $element);
+        Commands.initCommands($element);
+
+        cornerstone.loadImage(imagesIds[0]).then(function (image) {
+          cornerstone.displayImage($element, image);
+        });
       });
-    }).catch();
-  },
-  initViewer() {
-    this.$element = $('#conerstoneViewport')[0];
+    },
+    initViewer: function () {
+      $element = $('#conerstoneViewport')[0];
 
-    Menu.init();
+      Menu.init();
 
-    this.$viewer.removeClass('invisible');
+      $viewer.removeClass('invisible');
 
-    Tools.$element = this.$element;
-    Commands.$element = this.$element;
+      $window.on('resize', function () { return cornerstone.resize($element, true); });
 
-    this.$window.on('resize', () => cornerstone.resize(this.$element, true));
+      cornerstone.enable($element);
 
-    cornerstone.enable(this.$element);
-
-    this.getNextCase();
-  }
-}
+      Viewer.getNextCase();
+    }
+  };
+})();
