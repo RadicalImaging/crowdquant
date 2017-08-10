@@ -1,0 +1,77 @@
+.viewer-wrapper {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.viewer-wrapper .top-bar {
+  display: flex;
+}
+
+.viewer-wrapper .top-bar .viewer-tools {
+  flex: 1 0 auto;
+}
+
+.viewer-wrapper .top-bar .viewer-tools .tool {
+  display: inline-block;
+  text-align: -webkit-center;
+}
+
+.viewer-wrapper .top-bar .viewer-tools .tool svg {
+  stroke: #9ccef9;
+  fill: #9ccef9;
+  display: block;
+  width: 3rem;
+  height: 1.4285rem;
+  margin-bottom: 0.7142rem;
+  padding: 0.4285rem 0;
+}
+
+.viewer-wrapper .top-bar .viewer-tools .tool a {
+  text-decoration: none;
+  color: #9ccef9;
+  margin: 0 0.3571rem 0 0.3571rem;
+}
+
+.viewer-wrapper .top-bar .viewer-tools .tool.active a {
+  color: #efefef;
+}
+
+.viewer-wrapper .top-bar .viewer-tools .tool.active svg {
+  stroke: #efefef;
+}
+
+.viewer-wrapper .top-bar .viewer-tools .tool.active svg.tool-img {
+  border: 0.0714rem solid #efefef;
+  border-radius: 1.2142rem;
+  width: 2.8571rem;
+  background-color: #16202b;
+  padding: 0.3571rem 0;
+}
+
+.viewer-wrapper .viewport {
+  flex: 1 1 auto;
+  border: 0.0714rem solid #00a4d9;
+  margin: 0.3571rem;
+  position: relative;
+}
+
+.viewer-wrapper .viewport #conerstoneViewport {
+  width: 100%;
+  height: calc(100% - 10px);
+  position: absolute;
+}
+
+.scroll {
+  background-color: #000;
+  height: 0.7142rem;
+  bottom: 0px;
+  position: absolute;
+  width: 100%;
+}
+
+.scroll .thumb {
+  background-color: #00a4d9;
+  height: 0.7142rem;
+  border-radius: 0.7142rem;
+}
