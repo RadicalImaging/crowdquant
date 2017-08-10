@@ -1,5 +1,5 @@
 var Menu = (function () {
-  var $hamburguerMenu = $('.humburguer-menu');
+  var $hamburguerMenu = $('.hamburguer-menu');
   var $menuWrapper = $('.menu-wrapper');
   var $overlay = $('.loading-overlay');
 

@@ -12,7 +12,9 @@ var Viewer = (function () {
         if (error) {
           console.error(error);
 
+          $overlay.addClass('invisible');
           alert('There was an error fetching the case\'s images... Please wait a moment until you try to get the next case.');
+
           return;
         }
         Tools.initTools(imagesIds, $element);
