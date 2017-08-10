@@ -2,10 +2,10 @@ var Connector = (function () {
   var mockUrl = 'http://localhost:4000/mock.json';
 
   return {
-    getCase: function (successCB, failCB) {
+    getCase: function (callback) {
       return new Promise(function (resolve, reject) {
         var successHandler = function (response) {
-          successCB(response);
+          callback(null, response);
         };
 
         var errorHandler = function (error) {
@@ -13,7 +13,7 @@ var Connector = (function () {
             console.error(error);
           }
 
-          failCB(error);
+          callback(error);
         };
 
         $.ajax(mockUrl).done(successHandler).fail(errorHandler);

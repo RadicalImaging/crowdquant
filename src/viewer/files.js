@@ -1,45 +1,67 @@
-import Connector from './connector';
+var Files = (function () {
+  var filesDownloaded = 0;
 
-export default {
-  getFile(url) {
-    return new Promise(function (resolve, reject) {
-      const request = new XMLHttpRequest();
+  return {
+    getFile: function (callback, numberOfFiles) {
+      return function(url) {
+        var request = new XMLHttpRequest();
+        var file = null;
 
-      request.open('GET', url, true);
-      request.responseType = 'arraybuffer';
+        request.open('GET', url, true);
+        request.responseType = 'arraybuffer';
 
-      request.onload = function(oEvent) {
-        const arrayBuffer = request.response;
-        if (arrayBuffer) {
-          try {
-            resolve(new Blob([arrayBuffer], { type: 'application/dicom' }));
-          } catch (error) {
-            reject(error);
+        request.onload = function(event) {
+          var arrayBuffer = request.response;
+
+          if (arrayBuffer) {
+            try {
+              file = new Blob([arrayBuffer], { type: 'application/dicom' });
+
+              filesDownloaded++;
+
+              if (filesDownloaded === numberOfFiles) {
+                callback(null)
+              }
+            } catch (error) {
+              callback(error);
+            }
           }
+        };
+
+        request.send(null);
+
+        return file;
+      }
+    },
+    getCaseImages: function (callback) {
+      var $overlay = $('.loading-overlay');
+      $overlay.addClass('loading');
+      $overlay.removeClass('invisible');
+
+      var handleCaseData = function (error, caseStudy) {
+        if (error) {
+          return callback(error);
         }
-      };
 
-      request.send(null);
-    });
-  },
-  getCaseImages() {
-    const $overlay = $('.loading-overlay');
-    $overlay.addClass('loading');
-    $overlay.removeClass('invisible');
-
-    return new Promise((resolve, reject) => {
-      Connector.getCase().then((caseStudy) => {
         if (caseStudy && caseStudy.urls) {
-          Promise.all(caseStudy.urls.map(this.getFile)).then(function (files) {
+          var numberOfFiles = caseStudy.urls.length;
+
+          var handleImages = function (imgError) {
+            if (imgError) {
+              return callback(error);
+            }
+
             $overlay.addClass('invisible');
             $overlay.removeClass('loading');
 
-            resolve(files.map(cornerstoneWADOImageLoader.wadouri.fileManager.add));
-          }).catch(reject);
+            callback(null, caseStudy.urls.map(cornerstoneWADOImageLoader.wadouri.fileManager.add));
+          }
+
+          caseStudy.urls.map(this.getFile(callback, numberOfFiles));
         }
-      }).catch(function(error) {
-        reject(error);
-      });
-    });
-  }
-};
+      }
+
+      Connector.getCase(handleCaseData);
+    }
+  };
+})();
