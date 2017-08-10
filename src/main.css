@@ -1,0 +1,64 @@
+$white: #efefef;
+#00a4d9: #00a4d9;
+#9ccef9: #9ccef9;
+$black: #000;
+$light-black: #16202b;
+
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background: #000;
+}
+
+.invisible {
+  display: none !important;
+}
+
+button.submit {
+  background-color: #000;
+  border: 0.0714rem solid #00a4d9;
+  border-radius: 0.3571rem;
+  color: #9ccef9;
+}
+
+.loading-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 99;
+  margin: auto;
+  display: flex;
+  background: #9ccef9;
+  opacity: 0.7;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.loading-overlay .padding {
+  margin: auto;
+  flex: 1 0 auto;
+}
+
+.loading-overlay .content {
+  margin: auto;
+  flex: 1 0 auto;
+}
+
+.loading-overlay .content .spinner {
+  width: 5.9285rem;
+}
+
+.loading-overlay .content .spinner, .loading-overlay .content .submit-text {
+  display: none;
+}
+
+.loading-overlay.loading .content .spinner, .loading-overlay.submitting .content .spinner {
+  display: block;
+}
+
+.loading-overlay.submitting .content .submit-text {
+  display: block;
+}
