@@ -1,21 +1,21 @@
-.humburguer-menu {
+.hamburguer-menu {
   display: flex;
   flex-flow: column;
   justify-content: center;
   padding-right: 0.3571rem;
 }
 
-.humburguer-menu .menu {
+.hamburguer-menu .menu {
   flex: 0 1 auto;
   height: 2.1428rem;
   cursor: pointer;
 }
 
-.humburguer-menu .menu .humburguer-stroke {
+.hamburguer-menu .menu .hamburguer-stroke {
   width: 2.1428rem;
   border: 0.2142rem solid #9ccef9;
   border-radius: 0.7142rem;
-  margin-bottom: 0.3571;
+  margin-bottom: 0.3571rem;
   background-color: #9ccef9;
 }
 
