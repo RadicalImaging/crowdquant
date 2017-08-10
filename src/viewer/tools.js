@@ -8,7 +8,7 @@ var Tools = (function () {
   return {
     deactivateActiveTool: function () {
       if (active) {
-        Tools.deactivate(this.active);
+        Tools.deactivate(active);
         active = '';
       }
     },
