@@ -4,7 +4,11 @@
     <title>Lightweight Viewer</title>
     <meta name="viewport" content="initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="./src/main.css">
+    <link rel="stylesheet" type="text/css" href="./src/login/login.css">
+    <link rel="stylesheet" type="text/css" href="./src/menu/menu.css">
+    <link rel="stylesheet" type="text/css" href="./src/modal/modal.css">
+    <link rel="stylesheet" type="text/css" href="./src/viewer/viewer.css">
   </head>
   <body>
     <div class="login-wrapper">
@@ -111,6 +115,7 @@
       </ul>
     </div>
 
+    <!-- Dependencies -->
     <script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../node_modules/hammerjs/hammer.min.js"></script>
     <script type="text/javascript" src="../node_modules/cornerstone-math/dist/cornerstoneMath.min.js"></script>
@@ -118,9 +123,18 @@
     <script type="text/javascript" src="../node_modules/cornerstone-tools/dist/cornerstoneTools.min.js"></script>
     <script type="text/javascript" src="../node_modules/dicom-parser/dist/dicomParser.min.js"></script>
     <script type="text/javascript" src="../node_modules/cornerstone-wado-image-loader/dist/cornerstoneWADOImageLoader.min.js"></script>
-    <script type="text/javascript" src="./bundle.js"></script>
+
+    <!-- Code -->
+    <script type="text/javascript" src="./src/login/login.js"></script>
+    <script type="text/javascript" src="./src/menu/menu.js"></script>
+    <script type="text/javascript" src="./src/modal/modal.js"></script>
+    <script type="text/javascript" src="./src/viewer/commands.js"></script>
+    <script type="text/javascript" src="./src/viewer/connector.js"></script>
+    <script type="text/javascript" src="./src/viewer/files.js"></script>
+    <script type="text/javascript" src="./src/viewer/tools.js"></script>
+    <script type="text/javascript" src="./src/viewer/viewer.js"></script>
     <script type="text/javascript">
-      
+      Login.init();
     </script>
   </body>
 </html>

@@ -1,11 +1,11 @@
 var Files = (function () {
   var filesDownloaded = 0;
+  var files;
 
   return {
     getFile: function (callback, numberOfFiles) {
-      return function(url) {
+      return function(url, index) {
         var request = new XMLHttpRequest();
-        var file = null;
 
         request.open('GET', url, true);
         request.responseType = 'arraybuffer';
@@ -15,7 +15,7 @@ var Files = (function () {
 
           if (arrayBuffer) {
             try {
-              file = new Blob([arrayBuffer], { type: 'application/dicom' });
+              files[index] = new Blob([arrayBuffer], { type: 'application/dicom' });
 
               filesDownloaded++;
 
@@ -29,14 +29,14 @@ var Files = (function () {
         };
 
         request.send(null);
-
-        return file;
       }
     },
     getCaseImages: function (callback) {
       var $overlay = $('.loading-overlay');
       $overlay.addClass('loading');
       $overlay.removeClass('invisible');
+
+      filesDownloaded = 0;
 
       var handleCaseData = function (error, caseStudy) {
         if (error) {
@@ -45,19 +45,20 @@ var Files = (function () {
 
         if (caseStudy && caseStudy.urls) {
           var numberOfFiles = caseStudy.urls.length;
-
           var handleImages = function (imgError) {
             if (imgError) {
-              return callback(error);
+              return callback(imgError);
             }
 
             $overlay.addClass('invisible');
             $overlay.removeClass('loading');
 
-            callback(null, caseStudy.urls.map(cornerstoneWADOImageLoader.wadouri.fileManager.add));
+            callback(null, files.map(cornerstoneWADOImageLoader.wadouri.fileManager.add));
           }
 
-          caseStudy.urls.map(this.getFile(callback, numberOfFiles));
+          files = new Array(numberOfFiles);
+
+          caseStudy.urls.map(Files.getFile(handleImages, caseStudy.urls.length));
         }
       }
 

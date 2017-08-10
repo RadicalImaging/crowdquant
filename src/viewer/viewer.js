@@ -8,7 +8,13 @@ var Viewer = (function () {
     getNextCase: function () {
       $overlay.removeClass('invisible').addClass('loading');
 
-      Files.getCaseImages(function (imagesIds) {
+      Files.getCaseImages(function (error, imagesIds) {
+        if (error) {
+          console.error(error);
+
+          alert('There was an error fetching the case\'s images... Please wait a moment until you try to get the next case.');
+          return;
+        }
         Tools.initTools(imagesIds, $element);
         Commands.initCommands($element);
 
@@ -24,11 +30,11 @@ var Viewer = (function () {
 
       $viewer.removeClass('invisible');
 
-      this.$window.on('resize', function () { return cornerstone.resize($element, true); });
+      $window.on('resize', function () { return cornerstone.resize($element, true); });
 
       cornerstone.enable($element);
 
-      this.getNextCase();
+      Viewer.getNextCase();
     }
   };
 })();

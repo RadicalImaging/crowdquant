@@ -3,21 +3,19 @@ var Connector = (function () {
 
   return {
     getCase: function (callback) {
-      return new Promise(function (resolve, reject) {
-        var successHandler = function (response) {
-          callback(null, response);
-        };
+      var successHandler = function (response) {
+        callback(null, response);
+      };
 
-        var errorHandler = function (error) {
-          if (error) {
-            console.error(error);
-          }
+      var errorHandler = function (error) {
+        if (error) {
+          console.error(error);
+        }
 
-          callback(error);
-        };
+        callback(error);
+      };
 
-        $.ajax(mockUrl).done(successHandler).fail(errorHandler);
-      });
+      $.ajax(mockUrl).done(successHandler).fail(errorHandler);
     }
   }
 })();
