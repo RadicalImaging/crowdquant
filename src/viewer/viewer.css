@@ -27,6 +27,11 @@
   padding: 0.4285rem 0;
 }
 
+.viewer-wrapper .top-bar .viewer-tools .tool svg.window-level {
+  position: relative;
+  left: 0.7142rem;
+}
+
 .viewer-wrapper .top-bar .viewer-tools .tool a {
   text-decoration: none;
   color: #9ccef9;
