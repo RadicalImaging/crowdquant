@@ -50,13 +50,13 @@ var Tools = (function () {
       cornerstoneTools.stackScrollWheel.activate($element);
       cornerstoneTools.stackScrollMultiTouch.activate($element);
 
-      $thumb.css('width', (100/stack.imageIds.length) + '%');
+      $thumb.css('height', (100/stack.imageIds.length) + '%');
 
       $($element).on('CornerstoneNewImage', function () {
         var currentIndex = stack.currentImageIdIndex;
 
         $thumb.css({
-          'margin-left': ((100/stack.imageIds.length)*currentIndex) + '%'
+          'margin-top': ($thumb.height()*(currentIndex)) + 'px'
         });
       });
     },

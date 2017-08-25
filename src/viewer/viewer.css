@@ -62,21 +62,21 @@
 }
 
 .viewer-wrapper .viewport #conerstoneViewport {
-  width: 100%;
-  height: calc(100% - 10px);
+  width: calc(100% - 10px);
+  height: 100%;
   position: absolute;
 }
 
 .scroll {
   background-color: #000;
-  height: 0.7142rem;
+  height: 100%;
   bottom: 0px;
   position: absolute;
-  width: 100%;
+  width: 0.7142rem;
 }
 
 .scroll .thumb {
   background-color: #00a4d9;
-  height: 0.7142rem;
+  width: 0.7142rem;
   border-radius: 0.7142rem;
 }
