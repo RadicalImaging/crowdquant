@@ -1,5 +1,6 @@
 var Commands = (function () {
   var commandSelector = '.viewer-tools';
+  var $overlay = $('.loading-overlay');
   var $element;
 
   return {
@@ -13,6 +14,16 @@ var Commands = (function () {
 
       cornerstoneTools.globalImageIdSpecificToolStateManager.clear($element);
       cornerstone.updateImage($element);
+    },
+    save: function () {
+      Menu.closeMenu();
+      $overlay.removeClass('invisible').addClass('submitting');
+
+      setTimeout(function () {
+        Modal.show();
+
+        $overlay.removeClass('submitting');
+      }, 2000);
     },
     initCommands: function ($cornerstoneElement) {
       $element = $cornerstoneElement;
