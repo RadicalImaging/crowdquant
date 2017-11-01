@@ -44,11 +44,18 @@ var Tools = (function () {
         currentImageIdIndex: 0,
         imageIds: imageIds
       };
+      var configuration = {
+        testPointers: function (eventData) {
+          return (eventData.numPointers >= 2);
+        }
+      };
 
       cornerstoneTools.addStackStateManager($element, ['stack']);
       cornerstoneTools.addToolState($element, 'stack', stack);
       cornerstoneTools.stackScrollWheel.activate($element);
+
       cornerstoneTools.stackScrollMultiTouch.activate($element);
+      cornerstoneTools.stackScrollMultiTouch.setConfiguration(configuration);
 
       $thumb.css('height', (100/stack.imageIds.length) + '%');
 
